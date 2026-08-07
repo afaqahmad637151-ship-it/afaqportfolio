@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis lenis-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afaq Ahmad - Full Stack Developer Portfolio</title>
+    <meta name="description" content="Afaq Ahmad is a Full Stack Developer specializing in modern, scalable, AI-powered web applications with beautiful user experiences.">
+    <meta name="keywords" content="Afaq Ahmad, Full Stack Developer, Frontend Engineer, Backend Developer, AI Developer, MERN Stack, Next.js, Portfolio, Web Development, Software Engineer">
+    <meta name="author" content="Afaq Ahmad">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://afaqahmad.dev/">
+    <meta property="og:title" content="Afaq Ahmad - Full Stack Developer Portfolio">
+    <meta property="og:description" content="I build modern, scalable, AI-powered web applications with beautiful user experiences and high-performance backend systems.">
+    <meta property="og:image" content="https://afaqahmad.dev/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://afaqahmad.dev/">
+    <meta property="twitter:title" content="Afaq Ahmad - Full Stack Developer Portfolio">
+    <meta property="twitter:description" content="I build modern, scalable, AI-powered web applications with beautiful user experiences and high-performance backend systems.">
+    <meta property="twitter:image" content="https://afaqahmad.dev/assets/images/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons (devicon for specific tech icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/glassmorphism.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+
+    <!-- GSAP & ScrollTrigger (local or CDN) -->
+    <script src="./js/lib/gsap.min.js"></script>
+    <script src="./js/lib/ScrollTrigger.min.js"></script>
+    <script src="./js/lib/SplitText.min.js"></script> <!-- Optional, for advanced text animations -->
+    
+    <!-- Lenis Smooth Scroll (local or CDN) -->
+    <script src="./js/lib/lenis.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading Afaq Ahmad's Universe...</div>
+    </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress-indicator" class="scroll-progress-indicator"></div>
+
+    <!-- Cursor Glow Effect -->
+    <div id="cursor-glow" class="cursor-glow"></div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#hero" class="logo">Afaq Ahmad<span>.dev</span></a>
+            <button class="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button></li>
+                <li><button id="ai-assistant-toggle" class="btn btn-primary btn-sm floating-ai-btn">AI Chat <i class="fas fa-comment-dots"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Floating AI Assistant Chat Widget -->
+    <div id="ai-assistant-widget" class="ai-assistant-widget hidden glassmorphism-card">
+        <div class="ai-header">
+            <h3>AfaqAI Assistant</h3>
+            <button class="close-btn" aria-label="Close AI Assistant"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="ai-chat-messages">
+            <!-- Chat messages will be dynamically inserted here -->
+            <div class="chat-message bot-message">Hello! How can I assist you today regarding Afaq Ahmad's portfolio?</div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="ai-chat-input-field" placeholder="Ask me anything..." />
+            <button id="ai-chat-send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+            <button id="ai-chat-voice-btn" class="voice-btn" aria-label="Voice input"><i class="fas fa-microphone"></i></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section full-screen-section cinematic-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="./assets/videos/hero-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay gradient-overlay"></div>
+            <div class="container hero-content">
+                <h1 class="hero-heading split-text">Hi, I'm Afaq Ahmad</h1>
+                <p class="typing-animation-container">
+                    I'm a <span id="typing-text" class="typing-text"></span><span class="cursor">|</span>
+                </p>
+                <p class="hero-description reveal-text">
+                    I build modern, scalable, AI-powered web applications with beautiful user experiences and high-performance backend systems.
+                </p>
+                <div class="hero-buttons fade-in-up">
+                    <a href="#portfolio" class="btn btn-primary view-projects-btn">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary hire-me-btn">Hire Me</a>
+                    <a href="./assets/Afaq_Ahmad_CV.pdf" download class="btn btn-outline download-cv-btn"><i class="fas fa-download"></i> Download CV</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section full-screen-section cinematic-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="./assets/videos/about-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay gradient-overlay-right"></div>
+            <div class="container about-content reveal-container">
+                <h2 class="section-heading split-text">About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text glassmorphism-card fade-in-left">
+                        <p>I am Afaq Ahmad, a passionate and results-driven Full Stack Developer with expertise in crafting world-class digital experiences.</p>
+                        <p>My journey in development is fueled by a relentless pursuit of innovation and a deep understanding of both front-end aesthetics and back-end robustness. I specialize in building modern, scalable, and secure web applications that solve real-world problems.</p>
+                        <p>I thrive on transforming complex requirements into elegant code and intuitive user interfaces, ensuring optimal performance and maintainable architectures.</p>
+                        <ul>
+                            <li class="about-expertise-item"><i class="fas fa-code"></i> Frontend Development: Pixel-perfect, responsive, and engaging user interfaces.</li>
+                            <li class="about-expertise-item"><i class="fas fa-database"></i> Backend Development & Databases: High-performance APIs, robust data management, and secure server-side logic.</li>
+                            <li class="about-expertise-item"><i class="fas fa-cloud"></i> Cloud Deployment & DevOps: Streamlining deployment workflows, ensuring scalability and reliability on cloud platforms.</li>
+                            <li class="about-expertise-item"><i class="fas fa-brain"></i> Artificial Intelligence & Automation: Integrating AI models, building intelligent chatbots, and automating complex processes.</li>
+                            <li class="about-expertise-item"><i class="fas fa-rocket"></i> Performance Optimization: Delivering lightning-fast applications with exceptional user experience.</li>
+                        </ul>
+                    </div>
+                    <div class="about-image fade-in-right">
+                        <img src="./assets/images/afaq-ahmad-profile.jpg" alt="Afaq Ahmad Profile" class="glassmorphism-card blur-reveal-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section full-screen-section cinematic-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="./assets/videos/skills-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay gradient-overlay-left"></div>
+            <div class="container reveal-container">
+                <h2 class="section-heading split-text">My Expertise</h2>
+                <div id="skills-grid" class="skills-grid">
+                    <!-- Skills will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section full-screen-section cinematic-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="./assets/videos/services-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay gradient-overlay-right"></div>
+            <div class="container reveal-container">
+                <h2 class="section-heading split-text">Services I Offer</h2>
+                <div id="services-grid" class="services-grid">
+                    <!-- Services will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-section full-screen-section cinematic-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="./assets/videos/portfolio-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay gradient-overlay"></div>
+            <div class="container reveal-container">
+                <h2 class="section-heading split-text">Recent Projects</h2>
+                <div id="portfolio-grid" class="portfolio-grid">
+                    <!-- Projects will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials-section full-screen-section cinematic-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="./assets/videos/testimonials-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay gradient-overlay-left"></div>
+            <div class="container reveal-container">
+                <h2 class="section-heading split-text">What Clients Say</h2>
+                <div id="testimonials-carousel" class="testimonials-carousel">
+                    <!-- Testimonials will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section full-screen-section cinematic-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="./assets/videos/contact-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay gradient-overlay"></div>
+            <div class="container reveal-container">
+                <h2 class="section-heading split-text">Get In Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-info glassmorphism-card fade-in-left">
+                        <h3>Contact Details</h3>
+                        <p><i class="fas fa-envelope"></i> Email: <a href="mailto:afaq.ahmad.dev@example.com">afaq.ahmad.dev@example.com</a></p>
+                        <p><i class="fas fa-phone"></i> Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/1234567890">+1 (234) 567-890</a></p>
+                        <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://linkedin.com/in/afaqahmad" target="_blank">linkedin.com/in/afaqahmad</a></p>
+                        <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/afaqahmad" target="_blank">github.com/afaqahmad</a></p>
+                        <p><i class="fas fa-map-marker-alt"></i> Location: Dubai, UAE</p>
+                    </div>
+                    <form id="contact-form" class="contact-form glassmorphism-card fade-in-right">
+                        <h3>Send a Message</h3>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="Your Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Project Inquiry, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                        <div id="form-message" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+                <a href="./privacy-policy.html">Privacy Policy</a> <!-- Example extra page -->
+            </div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/afaqahmad" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/afaqahmad" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/afaqahmad" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> Afaq Ahmad. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Admin Login / Control Panel (Example - can be a separate HTML file) -->
+    <!-- For simplicity, this is a conceptual link. A real admin panel would be a separate protected route/file. -->
+    <a href="/admin.html" class="admin-link-floating btn btn-outline btn-sm">Admin Login</a>
+
+    <!-- Custom JavaScript -->
+    <script src="./js/utils.js" type="module"></script>
+    <script src="./js/api.js" type="module"></script>
+    <script src="./js/animations.js" type="module"></script>
+    <script src="./js/components/hero.js" type="module"></script>
+    <script src="./js/components/about.js" type="module"></script>
+    <script src="./js/components/skills.js" type="module"></script>
+    <script src="./js/components/services.js" type="module"></script>
+    <script src="./js/components/portfolio.js" type="module"></script>
+    <script src="./js/components/testimonials.js" type="module"></script>
+    <script src="./js/components/contact.js" type="module"></script>
+    <script src="./js/app.js" type="module"></script>
+</body>
+</html>

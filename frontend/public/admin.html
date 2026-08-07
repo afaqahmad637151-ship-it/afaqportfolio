@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afaq Ahmad - Admin Panel</title>
+    <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="./css/style.css"> <!-- Reusing global styles -->
+    <link rel="stylesheet" href="./css/admin.css"> <!-- Admin specific styles -->
+</head>
+<body class="admin-body">
+    <div class="admin-container">
+        <h1 class="admin-title">Afaq Ahmad Admin Panel</h1>
+        
+        <!-- Login Form -->
+        <div id="admin-login-section" class="admin-section login-section glassmorphism-card">
+            <h2>Admin Login</h2>
+            <form id="admin-login-form" class="form-style">
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" name="username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <div id="login-message" class="form-message"></div>
+            </form>
+        </div>
+
+        <!-- Admin Dashboard (Hidden until login) -->
+        <div id="admin-dashboard-section" class="admin-section dashboard-section glassmorphism-card hidden">
+            <div class="dashboard-header">
+                <h2>Welcome, <span id="admin-username-display"></span>!</h2>
+                <button id="admin-logout-btn" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="projects">Projects</button>
+                <button class="tab-button" data-tab="skills">Skills</button>
+                <button class="tab-button" data-tab="services">Services</button>
+                <button class="tab-button" data-tab="testimonials">Testimonials</button>
+                <button class="tab-button" data-tab="messages">Messages</button>
+            </div>
+
+            <!-- Projects Management Tab -->
+            <div id="tab-projects" class="tab-content active">
+                <h3>Projects Management</h3>
+                <button id="add-project-btn" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add New Project</button>
+                <div id="project-form-container" class="form-container hidden">
+                    <form id="project-form" class="form-style">
+                        <input type="hidden" id="project-id">
+                        <div class="form-group">
+                            <label for="project-title">Title</label>
+                            <input type="text" id="project-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-description">Description</label>
+                            <textarea id="project-description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-image-url">Image URL</label>
+                            <input type="url" id="project-image-url">
+                        </div>
+                        <div class="form-group">
+                            <label for="project-video-url">Video URL (Optional)</label>
+                            <input type="url" id="project-video-url">
+                        </div>
+                        <div class="form-group">
+                            <label for="project-tech-stack">Tech Stack (comma-separated)</label>
+                            <input type="text" id="project-tech-stack" placeholder="e.g., React,Node.js,MySQL" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-github-url">GitHub URL</label>
+                            <input type="url" id="project-github-url">
+                        </div>
+                        <div class="form-group">
+                            <label for="project-live-demo-url">Live Demo URL</label>
+                            <input type="url" id="project-live-demo-url">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Project</button>
+                        <button type="button" class="btn btn-outline cancel-form-btn">Cancel</button>
+                        <div id="project-form-message" class="form-message"></div>
+                    </form>
+                </div>
+                <div id="projects-list" class="data-list">
+                    <!-- Projects will be listed here -->
+                </div>
+            </div>
+
+            <!-- Skills Management Tab -->
+            <div id="tab-skills" class="tab-content hidden">
+                <h3>Skills Management</h3>
+                <button id="add-skill-btn" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add New Skill</button>
+                <div id="skill-form-container" class="form-container hidden">
+                    <form id="skill-form" class="form-style">
+                        <input type="hidden" id="skill-id">
+                        <div class="form-group">
+                            <label for="skill-category">Category</label>
+                            <input type="text" id="skill-category" required placeholder="e.g., Frontend">
+                        </div>
+                        <div class="form-group">
+                            <label for="skill-name">Name</label>
+                            <input type="text" id="skill-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="skill-icon-class">Icon Class (Font Awesome/Devicon)</label>
+                            <input type="text" id="skill-icon-class" placeholder="e.g., fab fa-react or devicon-nodejs-plain">
+                        </div>
+                        <div class="form-group">
+                            <label for="skill-order-index">Order Index</label>
+                            <input type="number" id="skill-order-index" value="0">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Skill</button>
+                        <button type="button" class="btn btn-outline cancel-form-btn">Cancel</button>
+                        <div id="skill-form-message" class="form-message"></div>
+                    </form>
+                </div>
+                <div id="skills-list" class="data-list">
+                    <!-- Skills will be listed here -->
+                </div>
+            </div>
+
+            <!-- Services Management Tab -->
+            <div id="tab-services" class="tab-content hidden">
+                <h3>Services Management</h3>
+                <button id="add-service-btn" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add New Service</button>
+                <div id="service-form-container" class="form-container hidden">
+                    <form id="service-form" class="form-style">
+                        <input type="hidden" id="service-id">
+                        <div class="form-group">
+                            <label for="service-title">Title</label>
+                            <input type="text" id="service-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-description">Description</label>
+                            <textarea id="service-description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-icon-class">Icon Class (Font Awesome)</label>
+                            <input type="text" id="service-icon-class" placeholder="e.g., fas fa-desktop">
+                        </div>
+                        <div class="form-group">
+                            <label for="service-order-index">Order Index</label>
+                            <input type="number" id="service-order-index" value="0">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Service</button>
+                        <button type="button" class="btn btn-outline cancel-form-btn">Cancel</button>
+                        <div id="service-form-message" class="form-message"></div>
+                    </form>
+                </div>
+                <div id="services-list" class="data-list">
+                    <!-- Services will be listed here -->
+                </div>
+            </div>
+
+            <!-- Testimonials Management Tab -->
+            <div id="tab-testimonials" class="tab-content hidden">
+                <h3>Testimonials Management</h3>
+                <button id="add-testimonial-btn" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add New Testimonial</button>
+                <div id="testimonial-form-container" class="form-container hidden">
+                    <form id="testimonial-form" class="form-style">
+                        <input type="hidden" id="testimonial-id">
+                        <div class="form-group">
+                            <label for="testimonial-client-name">Client Name</label>
+                            <input type="text" id="testimonial-client-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="testimonial-client-title">Client Title</label>
+                            <input type="text" id="testimonial-client-title" placeholder="e.g., CEO of Company X">
+                        </div>
+                        <div class="form-group">
+                            <label for="testimonial-avatar-url">Avatar URL</label>
+                            <input type="url" id="testimonial-avatar-url">
+                        </div>
+                        <div class="form-group">
+                            <label for="testimonial-quote">Quote</label>
+                            <textarea id="testimonial-quote" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="testimonial-rating">Rating (1-5)</label>
+                            <input type="number" id="testimonial-rating" min="1" max="5" value="5">
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Testimonial</button>
+                        <button type="button" class="btn btn-outline cancel-form-btn">Cancel</button>
+                        <div id="testimonial-form-message" class="form-message"></div>
+                    </form>
+                </div>
+                <div id="testimonials-list" class="data-list">
+                    <!-- Testimonials will be listed here -->
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="tab-messages" class="tab-content hidden">
+                <h3>Contact Messages</h3>
+                <div id="messages-list" class="data-list">
+                    <!-- Messages will be listed here -->
+                </div>
+            </div>
+
+        </div> <!-- End Dashboard -->
+    </div> <!-- End Admin Container -->
+
+    <script src="./js/api.js" type="module"></script>
+    <script src="./js/admin.js" type="module"></script>
+</body>
+</html>

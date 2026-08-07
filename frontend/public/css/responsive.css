@@ -1,0 +1,347 @@
+/* frontend/public/css/responsive.css */
+
+/* Tablet & Smaller Desktop Adjustments */
+@media (max-width: 992px) {
+    :root {
+        --spacing-md: 1.5rem;
+        --spacing-lg: 3rem;
+        --spacing-xl: 4rem;
+    }
+
+    .navbar .container {
+        padding: 0 var(--spacing-sm);
+    }
+    .logo {
+        font-size: 1.6rem;
+    }
+    .logo span {
+        font-size: 0.9rem;
+    }
+
+    .hero-heading {
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
+    }
+    .typing-animation-container {
+        font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+    }
+    .hero-description {
+        font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+        margin-bottom: var(--spacing-lg);
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    .btn {
+        width: 70%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .section-heading {
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    .about-image {
+        order: -1; /* Image above text on tablets */
+        margin-bottom: var(--spacing-md);
+    }
+    .about-text {
+        padding: var(--spacing-md);
+    }
+    .about-text p, .about-expertise-item {
+        font-size: 1rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: var(--spacing-md);
+    }
+    .skill-card {
+        padding: var(--spacing-sm);
+    }
+    .skill-card i, .skill-card .devicon {
+        font-size: 2.8rem;
+        margin-bottom: var(--spacing-xs);
+    }
+    .skill-card h4 {
+        font-size: 1.1rem;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    .service-card {
+        padding: var(--spacing-md);
+    }
+    .service-card h3 {
+        font-size: 1.6rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    .project-content {
+        padding: var(--spacing-md);
+    }
+    .project-content h3 {
+        font-size: 1.6rem;
+    }
+    .project-content p {
+        font-size: 0.95rem;
+    }
+
+    .testimonials-carousel {
+        width: 100%; /* Take full width for better scrolling */
+        padding: 0 var(--spacing-md);
+    }
+    .testimonial-card {
+        width: calc(100% - var(--spacing-md)); /* Adjust card width to fit one per view */
+        margin-right: var(--spacing-md); /* For gap between cards */
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-info, .contact-form {
+        padding: var(--spacing-md);
+    }
+    .contact-info h3, .contact-form h3 {
+        font-size: 1.8rem;
+    }
+    .contact-info p {
+        font-size: 1rem;
+    }
+
+    .ai-assistant-widget {
+        width: 300px;
+        height: 400px;
+        bottom: var(--spacing-md);
+        right: var(--spacing-md);
+    }
+    .floating-ai-btn {
+        bottom: var(--spacing-md);
+        right: var(--spacing-md);
+    }
+    .admin-link-floating {
+        bottom: var(--spacing-md);
+        left: var(--spacing-md);
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+    :root {
+        --spacing-sm: 0.8rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+    }
+
+    .navbar {
+        padding: var(--spacing-sm) 0;
+    }
+    .navbar .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+    .logo {
+        flex-grow: 1; /* Allow logo to take space */
+        text-align: left;
+        font-size: 1.4rem;
+    }
+    .menu-toggle {
+        display: block; /* Show menu toggle */
+        margin-left: auto; /* Push to right */
+    }
+    .navbar .nav-links {
+        display: none; /* Hidden by default for mobile menu */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: rgba(15, 23, 42, 0.95); /* Darker overlay for menu */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        transform: translateY(-10px); /* Adjust initial position */
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        border-radius: var(--border-radius);
+    }
+    .navbar .nav-links.active {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+    .nav-links li {
+        margin: var(--spacing-xs) 0;
+    }
+    .nav-links .nav-link {
+        padding: 10px 0;
+        width: 100%;
+        color: var(--text-color);
+        font-size: 1.1rem;
+    }
+    .nav-links .nav-link:hover, .nav-links .nav-link.active {
+        background-color: rgba(0, 123, 255, 0.2);
+    }
+    .dark-mode-toggle, .floating-ai-btn {
+        margin-top: var(--spacing-sm);
+        padding: 8px 12px;
+        border-radius: var(--border-radius);
+        width: auto;
+        height: auto;
+        font-size: 0.9rem;
+    }
+
+    .hero-heading {
+        font-size: clamp(2rem, 7vw, 3.5rem);
+    }
+    .typing-animation-container {
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+    }
+    .hero-description {
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-md);
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    .btn {
+        width: 90%;
+        max-width: none;
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    .section-heading {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .about-text {
+        padding: var(--spacing-sm);
+    }
+    .about-text p, .about-expertise-item {
+        font-size: 0.9rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: var(--spacing-xs);
+    }
+    .skill-card i, .skill-card .devicon {
+        font-size: 2rem;
+    }
+    .skill-card h4 {
+        font-size: 0.85rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    .service-card {
+        padding: var(--spacing-sm);
+    }
+    .service-card h3 {
+        font-size: 1.4rem;
+    }
+    .service-card p {
+        font-size: 0.9rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    .project-card {
+        width: 95%; /* Adjust width for better fit on narrow screens */
+        margin: 0 auto;
+    }
+    .project-content {
+        padding: var(--spacing-sm);
+    }
+    .project-content h3 {
+        font-size: 1.4rem;
+    }
+    .project-content p {
+        font-size: 0.85rem;
+    }
+    .project-tech-stack span {
+        font-size: 0.7rem;
+    }
+    .project-actions {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    .project-actions .btn {
+        width: 100%;
+    }
+
+    .testimonial-card {
+        width: calc(100% - var(--spacing-sm) * 2); /* Adjust for padding on each side */
+        margin-right: var(--spacing-sm);
+        padding: var(--spacing-md);
+    }
+    .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    .testimonial-quote {
+        font-size: 0.95rem;
+    }
+    .testimonial-client-name {
+        font-size: 1.1rem;
+    }
+    .testimonial-client-title {
+        font-size: 0.85rem;
+    }
+
+    .contact-info h3, .contact-form h3 {
+        font-size: 1.6rem;
+    }
+    .contact-info p {
+        font-size: 0.95rem;
+    }
+    .ai-assistant-widget {
+        width: calc(100% - var(--spacing-md) * 2);
+        right: var(--spacing-md);
+        bottom: var(--spacing-xl); /* Push up from bottom to clear footer */
+        height: 380px;
+    }
+    .ai-chat-input .send-btn, .ai-chat-input .voice-btn {
+        padding: 8px 10px;
+    }
+    .floating-ai-btn {
+        bottom: var(--spacing-md);
+        right: var(--spacing-md);
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    .admin-link-floating {
+        bottom: var(--spacing-md);
+        left: var(--spacing-md);
+        font-size: 0.8rem;
+    }
+
+    .footer {
+        padding: var(--spacing-md) 0;
+    }
+    .footer-links {
+        gap: var(--spacing-sm);
+    }
+    .footer-links a, .social-links a {
+        font-size: 1rem;
+    }
+}

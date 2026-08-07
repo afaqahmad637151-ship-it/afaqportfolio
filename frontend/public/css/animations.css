@@ -1,0 +1,126 @@
+/* frontend/public/css/animations.css */
+
+/* --- GSAP Target Specific Styles --- */
+/* These elements will have initial states or specific properties targeted by GSAP/ScrollTrigger */
+
+/* Ensure video background fills container and maintains aspect ratio */
+.cinematic-background .background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: brightness(0.7) blur(2px);
+    transition: filter 0.5s ease-out; /* Smooth transition for blur/brightness */
+}
+
+/* For cinematic text reveals */
+.split-text {
+    /* Initially hidden or transformed, will be revealed by GSAP SplitText */
+    opacity: 0;
+    transform: translateY(20px);
+}
+.split-text .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px) rotateZ(5deg);
+}
+
+/* For elements fading in/up */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+/* For blur-reveal images */
+.blur-reveal-image {
+    filter: blur(20px);
+    opacity: 0;
+    transition: filter 1.2s ease-out, opacity 1s ease-out;
+}
+.blur-reveal-image.revealed {
+    filter: blur(0px);
+    opacity: 1;
+}
+
+/* For cards animating into view (skills, services, portfolio, testimonials) */
+.skill-card,
+.service-card,
+.project-card,
+.testimonial-card {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    /* Individual card animations will be handled by GSAP staggered from this base */
+}
+
+/* --- Scroll Storytelling Specifics --- */
+
+/* Scroll-snapping setup (optional, can be applied to html or main container) */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Example: Parallax effect for sections' content, if desired */
+/* This is usually done by applying a transform on content relative to its scroll position */
+.hero-content,
+.about-content,
+.skills-grid,
+.services-grid,
+.portfolio-grid,
+.testimonials-carousel,
+.contact-grid {
+    /* Potential targets for slight parallax or sticky effects */
+    /* Handled via JS, but CSS can set initial z-index or perspective */
+    position: relative;
+    z-index: 2; /* Keep content above background */
+    will-change: transform, opacity; /* Optimize for animations */
+}
+
+/* --- UI Component Animations (e.g., hover effects) --- */
+
+/* 3D Hover Effect for Cards (example, also can be GSAP-driven) */
+.glassmorphism-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+}
+
+.glassmorphism-card:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateZ(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Cursor Glow initial state is managed in style.css */
+
+/* Loading screen animations in style.css */
+/* Typing animation in style.css */
