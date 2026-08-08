@@ -247,11 +247,18 @@ document.addEventListener('DOMContentLoaded', () => {
             icon_class: document.getElementById('skill-icon-class').value,
             order_index: parseInt(document.getElementById('skill-order-index').value),
         };
-
         try {
             if (id) {
                 await api.updateSkill(id, skillData);
                 showMessage(skillFormMessage, 'Skill updated successfully!', 'success');
             } else {
                 await api.createSkill(skillData);
-                showMessage(skillFormMessage, 'Skill created
+                showMessage(skillFormMessage, 'Skill created successfully!', 'success');
+            }
+        } catch (error) {
+            console.error('Error saving skill:', error);
+            showMessage(skillFormMessage, 'Failed to save skill.', 'error');
+        }
+    });
+});
+      
