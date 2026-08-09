@@ -10,14 +10,15 @@ let pool;
 async function connectToDatabase() {
     try {
         pool = mysql.createPool({
-            host: dbConfig.host,
-            user: dbConfig.user,
-            password: dbConfig.password,
-            database: dbConfig.database,
-            waitForConnections: true,
-            connectionLimit: 10,
-            queueLimit: 0
-        });
+    host: dbConfig.host,
+    port: dbConfig.port,
+    user: dbConfig.user,
+    password: dbConfig.password,
+    database: dbConfig.database,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
         
         // Test the connection
         const connection = await pool.getConnection();
