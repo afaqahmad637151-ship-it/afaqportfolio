@@ -26,11 +26,22 @@ async function connectToDatabase() {
         connection.release();
         return pool;
     } catch (error) {
-        logger.error('Error connecting to MySQL database:', error.message);
+    console.error('MYSQL ERROR:', {
+        message: error.message,
+        code: error.code,
+        errno: error.errno,
+        sqlState: error.sqlState,
+        host: dbConfig.host,
+        port: dbConfig.port,
+        user: dbConfig.user,
+        database: dbConfig.database
+    });
+    process.exit(1);
+}
         // In a real application, you might want to gracefully shut down or retry
         process.exit(1); 
     }
-}
+
 
 function getPool() {
     if (!pool) {
