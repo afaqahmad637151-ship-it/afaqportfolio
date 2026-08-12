@@ -1,4 +1,3 @@
-// backend/src/controllers/authController.js
 const jwt = require('jsonwebtoken');
 const { getPool } = require('../db/db');
 const { hashPassword, comparePassword } = require('../utils/hash');
@@ -8,100 +7,150 @@ const logger = require('../utils/logger');
 
 const signToken = (user) => {
     return jwt.sign(
-        { id: user.id, username: user.username, role: user.role },
+        {
+            id: user.id,
+            username: user.username,
+            role: user.role
+        },
         config.jwt.secret,
-        { expiresIn: config.jwt.expiresIn }
+        {
+            expiresIn: config.jwt.expiresIn
+        }
     );
 };
 
-// Initialize Admin User if not exists
+// Initialize default admin user
 const initializeAdmin = async () => {
     const pool = getPool();
+
     try {
-        const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [config.admin.username]);
-    if (rows.length === 0) {
-    const hashedPassword = await hashPassword(config.admin.password);
+        const [rows] = await pool.execute(
+            'SELECT * FROM users WHERE username = ?',
+            [config.admin.username]
+        );
 
-    await pool.execute(
-        'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
-        [config.admin.username, hashedPassword, 'admin']
-    );
+        if (rows.length === 0) {
+            const hashedPassword = await hashPassword(config.admin.password);
 
-    logger.info('Default admin user created successfully.');
-} else {
-    const hashedPassword = await hashPassword(config.admin.password);
+            await pool.execute(
+                'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
+                [
+                    config.admin.username,
+                    hashedPassword,
+                    'admin'
+                ]
+            );
 
-    await pool.execute(
-        'UPDATE users SET password = ?, role = ? WHERE username = ?',
-        [hashedPassword, 'admin', config.admin.username]
-    );
-
-    logger.info('Admin password reset successfully.');
-}
+            logger.info('Default admin user created successfully.');
+        } else {
+            logger.info('Admin user already exists.');
+        }
+    } catch (error) {
+        logger.error('Error initializing admin user:', error);
+    }
 };
 
-
+// Register
 exports.register = async (req, res, next) => {
     const { username, password } = req.body;
     const pool = getPool();
 
     try {
-        // Only allow registration if no admin exists, or specific logic
-        // For a portfolio, we might only allow one admin to be created manually or via seed
-        // Here, we'll restrict it to only one admin to keep it simple.
-        const [existingUsers] = await pool.execute('SELECT COUNT(*) AS count FROM users WHERE role = "admin"');
+        const [existingUsers] = await pool.execute(
+            'SELECT COUNT(*) AS count FROM users WHERE role = "admin"'
+        );
+
         if (existingUsers[0].count > 0) {
-            return next(new AppError('Admin user already exists. Registration denied.', 403));
+            return next(
+                new AppError(
+                    'Admin user already exists. Registration denied.',
+                    403
+                )
+            );
         }
 
         const hashedPassword = await hashPassword(password);
+
         const [result] = await pool.execute(
             'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
             [username, hashedPassword, 'admin']
         );
 
         if (result.affectedRows === 0) {
-            return next(new AppError('User registration failed.', 500));
+            return next(
+                new AppError('User registration failed.', 500)
+            );
         }
 
-        const newUser = { id: result.insertId, username, role: 'admin' };
+        const newUser = {
+            id: result.insertId,
+            username,
+            role: 'admin'
+        };
+
         const token = signToken(newUser);
 
         res.status(201).json({
             status: 'success',
             token,
-            user: {
-                id: newUser.id,
-                username: newUser.username,
-                role: newUser.role,
-            },
+            user: newUser
         });
+
     } catch (err) {
         logger.error('Registration error:', err);
-        next(new AppError('Failed to register user. Possible duplicate username.', 400));
+
+        next(
+            new AppError(
+                'Failed to register user. Possible duplicate username.',
+                400
+            )
+        );
     }
 };
 
+// Login
 exports.login = async (req, res, next) => {
     const { username, password } = req.body;
     const pool = getPool();
 
     if (!username || !password) {
-        return next(new AppError('Please provide username and password!', 400));
+        return next(
+            new AppError(
+                'Please provide username and password!',
+                400
+            )
+        );
     }
 
     try {
-        const [users] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);
+        const [users] = await pool.execute(
+            'SELECT * FROM users WHERE username = ?',
+            [username]
+        );
 
         if (users.length === 0) {
-            return next(new AppError('Incorrect username or password.', 401));
+            return next(
+                new AppError(
+                    'Incorrect username or password.',
+                    401
+                )
+            );
         }
 
         const user = users[0];
-        const isMatch = await comparePassword(password, user.password);
+
+        const isMatch = await comparePassword(
+            password,
+            user.password
+        );
 
         if (!isMatch) {
-            return next(new AppError('Incorrect username or password.', 401));
+            return next(
+                new AppError(
+                    'Incorrect username or password.',
+                    401
+                )
+            );
         }
 
         const token = signToken(user);
@@ -112,13 +161,20 @@ exports.login = async (req, res, next) => {
             user: {
                 id: user.id,
                 username: user.username,
-                role: user.role,
-            },
+                role: user.role
+            }
         });
+
     } catch (err) {
         logger.error('Login error:', err);
-        next(new AppError('Login failed due to a server error.', 500));
+
+        next(
+            new AppError(
+                'Login failed due to a server error.',
+                500
+            )
+        );
     }
 };
 
-module.exports.initializeAdmin = initializeAdmin; // Export for server startup
+module.exports.initializeAdmin = initializeAdmin;
