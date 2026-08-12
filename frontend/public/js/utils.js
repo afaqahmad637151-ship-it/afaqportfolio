@@ -8,7 +8,7 @@
 export const appState = {
     isDarkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
     isAIAssistantOpen: false,
-    backendUrl: 'http://localhost:5000/api', // Replace with your production backend URL
+    backendUrl: 'https://afaqportfolio-production.up.railway.app/api',
     adminToken: localStorage.getItem('adminToken') || null,
 };
 
