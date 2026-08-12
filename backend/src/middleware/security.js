@@ -7,11 +7,26 @@ const logger = require('../utils/logger');
 
 // CORS Configuration
 const corsOptions = {
-    origin: config.cors.frontendUrl, // Allow only your frontend to access
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'http://localhost:3000',
+            'https://afaqportfolio-gamma.vercel.app'
+        ];
+
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+
     allowedHeaders: ['Content-Type', 'Authorization'],
+
     credentials: true,
-    optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+
+    optionsSuccessStatus: 200
 };
 
 // Rate Limiting
