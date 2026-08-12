@@ -19,17 +19,25 @@ const initializeAdmin = async () => {
     const pool = getPool();
     try {
         const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [config.admin.username]);
-        if (rows.length === 0) {
-            const hashedPassword = await hashPassword(config.admin.password);
-            await pool.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
-                [config.admin.username, hashedPassword, 'admin']);
-            logger.info('Default admin user created successfully.');
-        } else {
-            logger.info('Admin user already exists.');
-        }
-    } catch (error) {
-        logger.error('Error initializing admin user:', error);
-    }
+    if (rows.length === 0) {
+    const hashedPassword = await hashPassword(config.admin.password);
+
+    await pool.execute(
+        'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
+        [config.admin.username, hashedPassword, 'admin']
+    );
+
+    logger.info('Default admin user created successfully.');
+} else {
+    const hashedPassword = await hashPassword(config.admin.password);
+
+    await pool.execute(
+        'UPDATE users SET password = ?, role = ? WHERE username = ?',
+        [hashedPassword, 'admin', config.admin.username]
+    );
+
+    logger.info('Admin password reset successfully.');
+}
 };
 
 
